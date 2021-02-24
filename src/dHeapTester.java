@@ -33,6 +33,9 @@ public class dHeapTester {
         min4 = new dHeap(4, 12, false);
     }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void testConstructorThrowsIAE() { dHeap illegal = new dHeap(0, 3, true); }
+
     @Test
     public void testSize() {
         assertEquals(12, max2.size());
@@ -40,6 +43,13 @@ public class dHeapTester {
         assertEquals(0, min4.size());
         assertEquals(11, max3.size());
         assertEquals(11, max4.size());
+
+        dHeap noArg2 = new dHeap();
+        assertEquals(0, noArg2.size());
+        dHeap oneArg1 = new dHeap(2);
+        assertEquals(0, oneArg1.size());
+        dHeap threeArg = new dHeap(1, 4, true);
+        assertEquals(0, threeArg.size());
     }
 
     @Test (expected = NullPointerException.class)
@@ -61,6 +71,11 @@ public class dHeapTester {
         String[] min4Add = {"String", "str", "st", "s", "S", "test"};
         for (String val : min4Add) { min4.add(val); }
         assertEquals(6, min4.size());
+
+        dHeap oneArg2 = new dHeap(1);
+        Character[] oneArgAdd = {'h', 'C', 'g', 'z', 'Z'};
+        for (Character ch : oneArgAdd) { oneArg2.add(ch); }
+        assertEquals(5, oneArg2.size());
     }
 
     @Test (expected = NoSuchElementException.class)
@@ -127,5 +142,10 @@ public class dHeapTester {
         }
         assertEquals(29, max3.remove());
         assertEquals(0, max3.size());
+
+        dHeap oneArg3 = new dHeap(24);
+        double[] oneArgAdd = {2.0, 3.777, 1, 1.0001, -7, -9, 0};
+        for (double doub : oneArgAdd) { oneArg3.add(doub); }
+        assertEquals(3.777, oneArg3.element());
     }
 }
